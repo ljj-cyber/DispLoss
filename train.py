@@ -136,10 +136,10 @@ def main(args):
         os.makedirs(checkpoint_dir, exist_ok=True)
         logger = create_logger(experiment_dir)
         logger.info(f"Experiment directory created at {experiment_dir}")
-
-        entity = os.environ["ENTITY"]
-        project = os.environ["PROJECT"]
+        
         if args.wandb:
+            entity = os.environ["ENTITY"]
+            project = os.environ["PROJECT"]
             wandb_utils.initialize(args, entity, experiment_name, project)
     else:
         logger = create_logger(None)
@@ -321,8 +321,8 @@ if __name__ == "__main__":
     parser.add_argument("--model", type=str, choices=list(SiT_models.keys()), default="SiT-XL/2")
     parser.add_argument("--image-size", type=int, choices=[256, 512], default=256)
     parser.add_argument("--num-classes", type=int, default=1000)
-    parser.add_argument("--epochs", type=int, default=1400)
-    parser.add_argument("--global-batch-size", type=int, default=256)
+    parser.add_argument("--epochs", type=int, default=80)
+    parser.add_argument("--global-batch-size", type=int, default=64)
     parser.add_argument("--global-seed", type=int, default=0)
     parser.add_argument("--vae", type=str, choices=["ema", "mse"], default="ema")  # Choice doesn't affect training
     parser.add_argument("--num-workers", type=int, default=4)

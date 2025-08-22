@@ -136,6 +136,7 @@ class Transport:
         t, x0, x1 = self.sample(x1)
         t, xt, ut = self.path_sampler.plan(t, x0, x1)
         model_output = model(xt, t, **model_kwargs)
+        print(f"Model output shape: {model_output.shape}")
 
         disp_loss = 0
         if "return_act" in model_kwargs and model_kwargs['return_act']:
